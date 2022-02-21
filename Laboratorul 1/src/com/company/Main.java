@@ -14,13 +14,12 @@ public class Main {
         int hexa=Integer.parseInt(hex,16);
         n = n + hexa;
         n = n * 6;
-        System.out.println(n);
+        System.out.println("n este " + n);
         int s = 0;
         while(n!=0) {
             s = s + n % 10;
             n = n / 10;
         }
-        System.out.println(s);
         int k = 0;
         if ( s > 9)
             do {
@@ -31,7 +30,6 @@ public class Main {
                     k /= 10;
                 }
             } while ( s > 9 );
-        System.out.println(s);
         //pentru a treia parte
         System.out.println("Willy-nilly, this semester I will learn " + languages[s]);//pentru a patra parte
     }
