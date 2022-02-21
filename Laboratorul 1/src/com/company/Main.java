@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello, World!");//pentru prima parte
-        String languages[] = new String[]  {"C", "C++", "C#", "Python", "Go", "Rust", "JavaScript", "PHP", "Swift", "Java"};//pentru a doua parte
+        String languages[] = {"C", "C++", "C#", "Python", "Go", "Rust", "JavaScript", "PHP", "Swift", "Java"};//pentru a doua parte
         int n = (int) (Math.random() * 1_000_000);
         n = n * 3;
         String binaryString="10101";
