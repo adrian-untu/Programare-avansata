@@ -75,16 +75,17 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 
-        System.out.println("Enter value for n");
-        var n = myObj.nextInt();  // Read user input for numberOfWords
+        var n = Integer.parseInt(args[0]);  // Read user input for numberOfWords
 
-        System.out.println("Enter value for p");
-        var p = myObj.nextInt();  // Read user input for lengthOfWords
-
-        myObj.nextLine();
-        System.out.println("Enter words for alphabet");
-        String alphabet = myObj.nextLine();
-        String[] cuvinte = generateRandomWords(n, p, alphabet.replace(" ", ""));
+        var p = Integer.parseInt(args[1]);  // Read user input for lengthOfWords
+        int k = 2;
+        String alphabet = "";
+        while(k < args.length){
+            alphabet = alphabet + args[k];
+            k++;
+        }
+        System.out.println(alphabet);
+        String[] cuvinte = generateRandomWords(n, p, alphabet);
         System.out.println(Arrays.toString(cuvinte));
 
         if(n >= 30000) {
