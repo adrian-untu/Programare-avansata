@@ -72,29 +72,75 @@ public class Main {
             System.out.println("\n");
         }
    }
+   public static int validareInteger(int k, String[] args){
+       try {
+           Integer.parseInt(args[k]);
+           return 1;
+       } catch(NumberFormatException e){
+           return 0;
+       }
+   }
+    public static int validareAlfabet(String args)
+    {
+        if (args == null) {
+            return 0;
+        }
+
+        int i = 7;
+        while(i < args.length())
+        {
+
+            char c = args.charAt(i);
+            if (!(c >= 'A' && c <= 'Z')) {
+                return 0;
+            }
+            i = i + 3;
+        }
+        return 1;
+    }
+    public static String toStrings(Object[] a) {
+        if (a == null)
+            return "null";
+
+        int iMax = a.length - 1;
+        if (iMax == -1)
+            return "[]";
+
+        StringBuilder b = new StringBuilder();
+        b.append('[');
+        for (int i = 0; ; i++) {
+            b.append(String.valueOf(a[i]));
+            if (i == iMax)
+                return b.append(']').toString();
+            b.append(", ");
+        }
+    }
     public static void main(String[] args) throws InterruptedException {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        String str = toStrings(args);
+        System.out.println(str);
+        if(validareInteger(0, args) == 1 && validareInteger(1, args) == 1 && validareAlfabet(str) == 1) {
+            var n = Integer.parseInt(args[0]);  // Read user input for numberOfWords
+            var p = Integer.parseInt(args[1]);  // Read user input for lengthOfWords
+            int k = 2;
+            String alphabet = "";
+            while (k < args.length) {
+                alphabet = alphabet + args[k];
+                k++;
+            }
+            System.out.println(alphabet);
+            String[] cuvinte = generateRandomWords(n, p, alphabet);
+            System.out.println(Arrays.toString(cuvinte));
 
-        var n = Integer.parseInt(args[0]);  // Read user input for numberOfWords
-
-        var p = Integer.parseInt(args[1]);  // Read user input for lengthOfWords
-        int k = 2;
-        String alphabet = "";
-        while(k < args.length){
-            alphabet = alphabet + args[k];
-            k++;
+            if (n >= 30000) {
+                getTime();
+            } else {
+                printNeighbours(n, p, cuvinte);
+                System.out.println("n < 30000 deci nu este necesar sa afisam timpul de executie.");
+            }
         }
-        System.out.println(alphabet);
-        String[] cuvinte = generateRandomWords(n, p, alphabet);
-        System.out.println(Arrays.toString(cuvinte));
-
-        if(n >= 30000) {
-            getTime();
+        else{
+            System.out.println("Argumentele din linia de comanda nu sunt valide. Reincercati executia liniei de comanda");
         }
-        else {
-            printNeighbours(n,p,cuvinte);
-            System.out.println("n < 30000 deci nu este necesar sa afisam timpul de executie.");
-        }
-
     }
 }
