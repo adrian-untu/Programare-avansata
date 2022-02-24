@@ -25,28 +25,28 @@ public class Main {
         }
         return randomStrings;
     }
-   public static int[][] getMatriceAdiacenta(int n, int p, String[] cuvinte){
-       var adiacenta = new int[n][n];
+   public static boolean[][] getMatriceAdiacenta(int n, int p, String[] cuvinte){
+       var adiacenta = new boolean[n][n];
        for(int i = 0; i < n; i++){
            for(int k = 0; k < n; k++) {
                int ok = 0;
                for(int j = 0; j < p; j++) {
                    for (int l = 0; l < p; l++) {
                        if (cuvinte[k].charAt(j) == cuvinte[i].charAt(l)) {
-                           adiacenta[k][i] = 1;
+                           adiacenta[k][i] = true;
                            ok = 1;
                            break;
                        }
                        if (ok == 0) {
-                           adiacenta[k][i] = 0;
+                           adiacenta[k][i] = false;
                        }
                    }
                }
            }
        }
        System.out.println("Matricea de adiacenta este ");
-       for (int[] ints : adiacenta) {
-           for (int anInt : ints) {
+       for (boolean[] ints : adiacenta) {
+           for (boolean anInt : ints) {
                System.out.print(anInt + " ");
            }
            System.out.println("\n");
@@ -54,7 +54,7 @@ public class Main {
        return adiacenta;
    }
    public static void printNeighbours (int n, int p, String[] cuvinte){
-       var adiacenta = new int[n][n];
+       var adiacenta = new boolean[n][n];
        String[][] vecini = new String[n][n];
        adiacenta = getMatriceAdiacenta(n, p, cuvinte);
         for (int i = 0; i < n; i++){
@@ -66,37 +66,44 @@ public class Main {
         for(int i = 0; i < n; i++){
             System.out.println("Vecinii lui " + cuvinte[i] + " sunt: ");
             for(int j = 0; j < n; j++){
-                if(adiacenta[i][j] == 1 && i != j)
+                if(adiacenta[i][j] && i != j)
                     System.out.println(cuvinte[j] + " ");
             }
             System.out.println("\n");
         }
    }
-   public static int validareInteger(int k, String[] args){
+   public static boolean validareInteger(int k, String[] args){
        try {
            Integer.parseInt(args[k]);
-           return 1;
+           return true;
        } catch(NumberFormatException e){
-           return 0;
+           return false;
        }
    }
-    public static int validareAlfabet(String args)
+    public static boolean validareAlfabet(String args, int n)
     {
+        int[] frecv = new int[27];
         if (args == null) {
-            return 0;
+            return false;
         }
+        int nrcif = 0;
+        while(n != 0){
+            n/=10;
+            nrcif++;
+        }
+            int i = 6 + nrcif;
+            while (i < args.length()) {
 
-        int i = 7;
-        while(i < args.length())
-        {
-
-            char c = args.charAt(i);
-            if (!(c >= 'A' && c <= 'Z')) {
-                return 0;
+                char c = args.charAt(i);
+                if (!(c >= 'A' && c <= 'Z')) {
+                    return false;
+                }
+                frecv[c - '0' - 17]++;
+                if(frecv[c - '0' - 17] > 1)
+                    return false;
+                i = i + 3;
             }
-            i = i + 3;
-        }
-        return 1;
+            return true;
     }
     public static String toStrings(Object[] a) {
         if (a == null)
@@ -119,28 +126,28 @@ public class Main {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         String str = toStrings(args);
         System.out.println(str);
-        if(validareInteger(0, args) == 1 && validareInteger(1, args) == 1 && validareAlfabet(str) == 1) {
-            var n = Integer.parseInt(args[0]);  // Read user input for numberOfWords
-            var p = Integer.parseInt(args[1]);  // Read user input for lengthOfWords
-            int k = 2;
-            String alphabet = "";
-            while (k < args.length) {
-                alphabet = alphabet + args[k];
-                k++;
-            }
-            System.out.println(alphabet);
-            String[] cuvinte = generateRandomWords(n, p, alphabet);
-            System.out.println(Arrays.toString(cuvinte));
+        var n = Integer.parseInt(args[0]);  // Read user input for numberOfWords
+        if(n < 30000) {
+            if (validareInteger(0, args) && validareInteger(1, args) && validareAlfabet(str, n)) {
+                var p = Integer.parseInt(args[1]);  // Read user input for lengthOfWords
+                int k = 2;
+                String alphabet = "";
+                while (k < args.length) {
+                    alphabet = alphabet + args[k];
+                    k++;
+                }
+                System.out.println(alphabet);
+                String[] cuvinte = generateRandomWords(n, p, alphabet);
+                System.out.println(Arrays.toString(cuvinte));
 
-            if (n >= 30000) {
-                getTime();
+                    printNeighbours(n, p, cuvinte);
+                    System.out.println("n < 30000 deci nu este necesar sa afisam timpul de executie.");
             } else {
-                printNeighbours(n, p, cuvinte);
-                System.out.println("n < 30000 deci nu este necesar sa afisam timpul de executie.");
+                System.out.println("Argumentele din linia de comanda nu sunt valide. Reincercati executia liniei de comanda");
             }
         }
         else{
-            System.out.println("Argumentele din linia de comanda nu sunt valide. Reincercati executia liniei de comanda");
+            getTime();
         }
     }
 }
