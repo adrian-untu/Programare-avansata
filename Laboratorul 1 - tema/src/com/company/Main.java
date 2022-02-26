@@ -80,9 +80,12 @@ public class Main {
            return false;
        }
    }
-    public static boolean validareAlfabet(String args, int n)
+    public static boolean validareAlfabet(String args, int arg1, int arg2, String[] args2)
     {
-        int[] frecv = new int[27];
+        if(validareInteger(0, args2) && validareInteger(1, args2)) {
+            var n = Integer.parseInt(args2[arg1]);  // Read user input for numberOfWords
+            var p = Integer.parseInt(args2[arg2]);  // Read user input for lengthOfWords
+        int[] frecv = new int[args.length()];
         if (args == null) {
             return false;
         }
@@ -91,19 +94,27 @@ public class Main {
             n/=10;
             nrcif++;
         }
-            int i = 6 + nrcif;
+        int nrcif1 = 0;
+        while(p != 0){
+            p/=10;
+            nrcif1++;
+        }
+            int i = 5 + nrcif + nrcif1;
             while (i < args.length()) {
-
                 char c = args.charAt(i);
                 if (!(c >= 'A' && c <= 'Z')) {
                     return false;
                 }
                 frecv[c - '0' - 17]++;
-                if(frecv[c - '0' - 17] > 1)
+                if(frecv[c - '0' - 17] == 2)
                     return false;
                 i = i + 3;
             }
             return true;
+        }
+        else {
+            return false;
+        }
     }
     public static String toStrings(Object[] a) {
         if (a == null)
@@ -126,28 +137,35 @@ public class Main {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         String str = toStrings(args);
         System.out.println(str);
-        var n = Integer.parseInt(args[0]);  // Read user input for numberOfWords
-        if(n < 30000) {
-            if (validareInteger(0, args) && validareInteger(1, args) && validareAlfabet(str, n)) {
-                var p = Integer.parseInt(args[1]);  // Read user input for lengthOfWords
-                int k = 2;
-                String alphabet = "";
-                while (k < args.length) {
-                    alphabet = alphabet + args[k];
-                    k++;
-                }
-                System.out.println(alphabet);
-                String[] cuvinte = generateRandomWords(n, p, alphabet);
-                System.out.println(Arrays.toString(cuvinte));
+        if (validareInteger(0, args) && validareInteger(1, args) && validareAlfabet(str, 0, 1, args)) {
+            var n = Integer.parseInt(args[0]);  // Read user input for numberOfWords
+            var p = Integer.parseInt(args[1]);  // Read user input for lengthOfWords
+            if (n < 30000) {
+                    int k = 2;
+                    String alphabet = "";
+                    while (k < args.length) {
+                        alphabet = alphabet + args[k];
+                        k++;
+                    }
+                    System.out.println(alphabet);
+                    String[] cuvinte = generateRandomWords(n, p, alphabet);
+                    System.out.println(Arrays.toString(cuvinte));
 
                     printNeighbours(n, p, cuvinte);
                     System.out.println("n < 30000 deci nu este necesar sa afisam timpul de executie.");
-            } else {
-                System.out.println("Argumentele din linia de comanda nu sunt valide. Reincercati executia liniei de comanda");
+                }
+               else {
+                getTime();
             }
         }
-        else{
-            getTime();
+        else {
+                    if (!validareInteger(0, args))
+                        System.out.println("Argumentul aferent lui n nu este valid.");
+                    if (!validareInteger(1, args))
+                        System.out.println("Argumentul aferent lui p nu este valid.");
+                    if (!validareAlfabet(str, 0, 1, args))
+                        System.out.println("Alfabetul nu este valid.");
+                    System.out.println("Reincercati executia liniei de comanda.");
+                }
+            }
         }
-    }
-}
