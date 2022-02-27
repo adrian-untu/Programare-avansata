@@ -155,6 +155,14 @@ public class Main {
                     System.out.println("n < 30000 deci nu este necesar sa afisam timpul de executie.");
                 }
                else {
+                int k = 2;
+                String alphabet = "";
+                while (k < args.length) {
+                    alphabet = alphabet + args[k];
+                    k++;
+                }
+                String[] cuvinte = generateRandomWords(n, p, alphabet);
+                printNeighbours(n, p, cuvinte);
                 getTime();
             }
         }
