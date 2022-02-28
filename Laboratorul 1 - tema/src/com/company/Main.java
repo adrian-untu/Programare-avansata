@@ -187,6 +187,7 @@ public class Main {
                     k++;
                 }
                 String[] cuvinte = generateRandomWords(n, p, alphabet);
+                System.out.println(Arrays.toString(cuvinte));
                 printNeighbours2(n, p, cuvinte);
                 long endTime = System.nanoTime();
                 long timeElapsed = endTime - startTime;
