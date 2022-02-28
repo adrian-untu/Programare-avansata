@@ -4,12 +4,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    public static void getTime() throws InterruptedException {
-        long startTime = System.nanoTime();
-        long endTime = System.nanoTime();
-        long timeElapsed = endTime - startTime;
-        System.out.println("Execution time in nanoseconds: " + timeElapsed);
-    }
     public static String[] generateRandomWords(int numberOfWords, int lengthOfWords, String alphabet)
     {
         String[] randomStrings = new String[numberOfWords];
@@ -53,6 +47,27 @@ public class Main {
        }
        return adiacenta;
    }
+    public static boolean[][] getMatriceAdiacenta2(int n, int p, String[] cuvinte){
+        var adiacenta = new boolean[n][n];
+        for(int i = 0; i < n; i++){
+            for(int k = 0; k < n; k++) {
+                int ok = 0;
+                for(int j = 0; j < p; j++) {
+                    for (int l = 0; l < p; l++) {
+                        if (cuvinte[k].charAt(j) == cuvinte[i].charAt(l)) {
+                            adiacenta[k][i] = true;
+                            ok = 1;
+                            break;
+                        }
+                        if (ok == 0) {
+                            adiacenta[k][i] = false;
+                        }
+                    }
+                }
+            }
+        }
+        return adiacenta;
+    }
    public static void printNeighbours (int n, int p, String[] cuvinte){
        var adiacenta = new boolean[n][n];
        String[][] vecini = new String[n][n];
@@ -72,6 +87,17 @@ public class Main {
             System.out.println("\n");
         }
    }
+    public static void printNeighbours2 (int n, int p, String[] cuvinte){
+        var adiacenta = new boolean[n][n];
+        String[][] vecini = new String[n][n];
+        adiacenta = getMatriceAdiacenta2(n, p, cuvinte);
+        for (int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++) {
+
+                vecini[i][j] = cuvinte[j];
+            }
+        }
+    }
    public static boolean validareInteger(int k, String[] args){
        try {
            Integer.parseInt(args[k]);
@@ -134,9 +160,9 @@ public class Main {
         }
     }
     public static void main(String[] args) throws InterruptedException {
+        long startTime = System.nanoTime();
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         String str = toStrings(args);
-        System.out.println(str);
         if (validareInteger(0, args) && validareInteger(1, args) && validareAlfabet(str, 0, 1, args)) {
             var n = Integer.parseInt(args[0]);  // Read user input for numberOfWords
             var p = Integer.parseInt(args[1]);  // Read user input for lengthOfWords
@@ -147,7 +173,6 @@ public class Main {
                         alphabet = alphabet + args[k];
                         k++;
                     }
-                    System.out.println(alphabet);
                     String[] cuvinte = generateRandomWords(n, p, alphabet);
                     System.out.println(Arrays.toString(cuvinte));
 
@@ -162,8 +187,10 @@ public class Main {
                     k++;
                 }
                 String[] cuvinte = generateRandomWords(n, p, alphabet);
-                printNeighbours(n, p, cuvinte);
-                getTime();
+                printNeighbours2(n, p, cuvinte);
+                long endTime = System.nanoTime();
+                long timeElapsed = endTime - startTime;
+                System.out.println("Execution time in nanoseconds: " + timeElapsed);
             }
         }
         else {
