@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         Event C1=new Event("C1",100,8,10);
-        Event C2=new Event("C2", 100, 10, 2);
+        Event C2=new Event("C2", 100, 10, 12);
         Event L1=new Event("L1", 30, 8, 10);
         Event L2=new Event("L2", 30, 8, 10);
         Event L3=new Event("L3", 30, 10, 12);

@@ -25,13 +25,37 @@ public class Solution{
     }
     public String toString(){
         StringBuilder s = new StringBuilder();
+        String s1 = "";
         for(Event e: events) {
             for (Room r : rooms) {
                 if (e.getSize() == r.getCapacity()) {
-                    for (Event e1 : events) {
-                        if (e1.getStart() != e.getStart() && !e1.equals(e) && e1.getSize() == e.getSize()) {
-                            s.append(e.getName()).append(" -> ").append(r.getName()).append("\n");
+                    int ok = 1;
+                    for(Event e1: events){
+                        if(!e1.equals(e) && e.getStart() == e1.getStart() && e.getSize() == e1.getSize() && e.getEnd() == e1.getEnd()){
+                            ok = 0;
                             break;
+                        }
+                    }
+                    if(ok==1) {
+                        s.append(e.getName()).append(" -> ").append(r.getName()).append("\n");
+                        s1 += e.getName();
+                    }
+                    else{
+                        for(Event e1: events){
+                            if(!e1.equals(e) && e.getStart() == e1.getStart() && e.getSize() == e1.getSize() && e.getEnd() == e1.getEnd()){
+                                for(Room r1: rooms){
+                                    if(!r1.equals(r) && r1.getCapacity() == r.getCapacity() && s1.contains(e1.getName())){
+                                        s.append(e.getName()).append(" -> ").append(r1.getName()).append("\n");
+                                        s1 += e.getName();
+                                        break;
+                                    }
+                                    else if(!r1.equals(r) && r1.getCapacity() == r.getCapacity() && !s1.contains(e1.getName())){
+                                        s.append(e.getName()).append(" -> ").append(r.getName()).append("\n");
+                                        s1 += e.getName();
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                     break;
