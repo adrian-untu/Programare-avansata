@@ -1,6 +1,12 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/description.html
+/encodings.xml
+/misc.xml
+/modules.xml
+/project-template.xml
+/vcs.xml
 Computer.class
 Graph.class
 Identifiable.class
