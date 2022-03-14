@@ -1,6 +1,16 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+Computer.class
+Graph.class
+Identifiable.class
+Main.class
+Network.class
+Node.class
+Router.class
+Storage.class
+Switch.class
+Units.class
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
