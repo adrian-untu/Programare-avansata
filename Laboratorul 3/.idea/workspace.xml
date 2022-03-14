@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ef1a6741-9837-4219-84ea-56457f5a39e0" name="Changes" comment="" />
+    <list default="true" id="ef1a6741-9837-4219-84ea-56457f5a39e0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,10 +92,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Laboratorul 2 - tema" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager" selected="Application.Main (1)">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Main (1)" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.companyHomework.Main" />
       <module name="Laboratorul 3" />
       <extension name="coverage">
@@ -118,7 +120,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -135,7 +136,8 @@
       <workItem from="1646663128412" duration="6267000" />
       <workItem from="1647091595076" duration="2246000" />
       <workItem from="1647192040082" duration="9457000" />
-      <workItem from="1647271343085" duration="2046000" />
+      <workItem from="1647271343085" duration="2417000" />
+      <workItem from="1647274211597" duration="335000" />
     </task>
     <servers />
   </component>
