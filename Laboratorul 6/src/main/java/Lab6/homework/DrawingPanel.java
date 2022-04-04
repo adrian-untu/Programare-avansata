@@ -11,6 +11,7 @@ public class DrawingPanel extends JPanel {
     int boardWidth, boardHeight;
     int cellWidth, cellHeight;
     int padX, padY;
+    public int[][] matrix;
     int stoneSize = 20;
     BufferedImage image; //the offscreen image
     Graphics2D offscreen; //the offscreen graphics
@@ -30,6 +31,7 @@ public class DrawingPanel extends JPanel {
     }
 
     final void init(int rows, int cols) {
+        matrix = new int[frame.configPanel.getRows()][frame.configPanel.getCols()];
         this.rows = rows;
         this.cols = cols;
         this.padX = stoneSize + 10;

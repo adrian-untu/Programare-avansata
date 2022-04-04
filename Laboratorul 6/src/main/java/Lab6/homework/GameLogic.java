@@ -58,11 +58,27 @@ public class GameLogic {
         frame.canvas.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                if(valdiateMove(e.getX(), e.getY()))
                 frame.canvas.paintStones(e.getX(), e.getY());
                 frame.canvas.repaint();
             }
             //Can’t use lambdas, JavaFX does a better job in these cases
         });
+    }
+    private boolean valdiateMove(int x,int y)
+    {
+
+        x = x / frame.canvas.cellWidth;
+        y = y / frame.canvas.cellHeight;
+        if(frame.canvas.matrix[x][y]==0)
+        {
+            frame.canvas.matrix[x][y]=1;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
 
