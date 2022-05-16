@@ -1,7 +1,7 @@
 DECLARE
     v_count INT;
 BEGIN
-    SELECT count(*) INTO v_count FROM user_tables WHERE table_name IN (UPPER('continents'), UPPER('countries'));
+    SELECT count(*) INTO v_count FROM user_tables WHERE table_name IN (UPPER('users'), UPPER('friends'), UPPER('messages'));
     IF v_count = 0 THEN
         EXECUTE IMMEDIATE 'CREATE TABLE users (
                                                   username VARCHAR2(50) NOT NULL,
